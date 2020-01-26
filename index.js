@@ -11,11 +11,11 @@ app.get("/", function(req, res){
 app.get("/results", function(req, res) {
 
     var query = req.query.search;
-    var url = "http://www.omdbapi.com/?apikey=[2e904546]&s=" + query;
+    var url = "http://www.omdbapi.com/?s="+ query +"&apikey=2e904546" ;
     request("url", function (error, response, body) {
         if (!error && response.statusCode == 200)
             var results = JSON.parse(body);
-           console.log(body);
+            console.log(body);
         res.render("results", {results: results});
     });
 });
