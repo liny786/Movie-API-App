@@ -1,5 +1,6 @@
 var express = require("express");
 var request = require("request");
+var bodyParser = require("body-parser");
 
 var app = express();
 app.set("view engine", "ejs");
@@ -10,9 +11,8 @@ app.get("/", function(req, res){
 
 app.get("/results", function(req, res) {
 
-    var query = req.query.search;
-    var url = "http://www.omdbapi.com/?s="+ query +"&apikey=2e904546" ;
-    request("url", function (error, response, body) {
+    var url = "http://www.omdbapi.com/?s="+req.query.search+"&apikey=2e904546" ;
+    request.get("url", function (error, response, body) {
         if (!error && response.statusCode == 200)
             var results = JSON.parse(body);
             console.log(body);
@@ -23,3 +23,4 @@ app.get("/results", function(req, res) {
         console.log("Server has started");
     });
 
+<!--http://www.omdbapi.com/?s=harry&apikey=2e904546 !-->
